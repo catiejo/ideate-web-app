@@ -155,19 +155,7 @@ function prepareCanvas()
 			{
 				if(mouseY > sizeHotspotStartY)
 				{
-					var sizeHotspotStartX = drawingAreaX + drawingAreaWidth;
-					if(mouseY < sizeHotspotStartY + sizeHotspotHeight && mouseX > sizeHotspotStartX)
-					{
-						if(mouseX < sizeHotspotStartX + sizeHotspotWidthObject.huge){
-							curSize = "huge";
-						}else if(mouseX < sizeHotspotStartX + sizeHotspotWidthObject.large + sizeHotspotWidthObject.huge){
-							curSize = "large";
-						}else if(mouseX < sizeHotspotStartX + sizeHotspotWidthObject.normal + sizeHotspotWidthObject.large + sizeHotspotWidthObject.huge){
-							curSize = "normal";
-						}else if(mouseX < sizeHotspotStartX + sizeHotspotWidthObject.small + sizeHotspotWidthObject.normal + sizeHotspotWidthObject.large + sizeHotspotWidthObject.huge){
-							curSize = "small";
-						}
-					}
+					// Do nothing (deprecating size picker)
 				}
 				else
 				{
@@ -312,15 +300,7 @@ function redraw()
 		alert("Error: Current Tool is undefined");
 	}
 
-	if(curSize == "small"){
-		locX = 467;
-	}else if(curSize == "normal"){
-		locX = 450;
-	}else if(curSize == "large"){
-		locX = 428;
-	}else if(curSize == "huge"){
-		locX = 399;
-	}
+	locX = 450;
 	locY = 189;
 	context.beginPath();
 	context.rect(locX, locY, 2, 12);
@@ -334,23 +314,10 @@ function redraw()
 	context.rect(drawingAreaX, drawingAreaY, drawingAreaWidth, drawingAreaHeight);
 	context.clip();
 
-	var radius;
+	var radius = 5;
 	var i = 0;
 	for(; i < clickX.length; i++)
 	{
-		if(clickSize[i] == "small"){
-			radius = 2;
-		}else if(clickSize[i] == "normal"){
-			radius = 5;
-		}else if(clickSize[i] == "large"){
-			radius = 10;
-		}else if(clickSize[i] == "huge"){
-			radius = 20;
-		}else{
-			alert("Error: Radius is zero for click " + i);
-			radius = 0;
-		}
-
 		context.beginPath();
 		if(clickDrag[i] && i){
 			context.moveTo(clickX[i-1], clickY[i-1]);
