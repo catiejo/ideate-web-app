@@ -15,8 +15,8 @@
 
 var canvas;
 var context;
-var canvasWidth = 1000;//490;
-var canvasHeight = 1000;//220;
+var canvasWidth = $(window).width();//490;
+var canvasHeight = $(window).height();//220;
 var padding = 25;
 var lineWidth = 8;
 var colorPurple = "#cb3594";
@@ -150,6 +150,22 @@ function prepareCanvas()
 	$('#canvas').mouseleave(function(e){
 		paint = false;
 	});
+
+	$('#purple').click(function() {
+    curColor = colorPurple;
+  });
+
+	$('#yellow').click(function() {
+    curColor = colorYellow;
+  });
+
+	$('#green').click(function() {
+    curColor = colorGreen;
+  });
+
+	$('#brown').click(function() {
+    curColor = colorBrown;
+  });
 }
 
 /**
