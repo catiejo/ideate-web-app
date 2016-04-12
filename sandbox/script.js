@@ -15,8 +15,8 @@
 
 var canvas;
 var context;
-var canvasWidth = 490;
-var canvasHeight = 220;
+var canvasWidth = 1000;//490;
+var canvasHeight = 1000;//220;
 var padding = 25;
 var lineWidth = 8;
 var colorPurple = "#cb3594";
@@ -163,7 +163,7 @@ function addClick(x, y, dragging)
 	clickX.push(x);
 	clickY.push(y);
 	// clickTool.push(curTool);
-	// clickColor.push(curColor);
+	clickColor.push(curColor);
 	// clickSize.push(curSize);
 	clickDrag.push(dragging);
 }
@@ -194,7 +194,7 @@ function clearCanvas()
 function redraw(){
   context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
 
-  context.strokeStyle = "#df4b26";
+  // context.strokeStyle = "#df4b26";
   context.lineJoin = "round";
   context.lineWidth = 5;
 
@@ -208,6 +208,7 @@ function redraw(){
      context.lineTo(clickX[i], clickY[i]);
      context.closePath();
      context.stroke();
+		 context.strokeStyle = clickColor[i];
   }
 }
 
