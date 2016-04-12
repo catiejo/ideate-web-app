@@ -88,6 +88,11 @@ var createUserEvents = function()
 	$('#brown').click(function() {
 		curColor = colorBrown;
 	});
+
+	$('#share').click(function() {
+			window.open(canvas.toDataURL());
+	});
+
 }
 
 /**
