@@ -15,8 +15,8 @@
 
 var canvas;
 var context;
-var canvasWidth = 490;
-var canvasHeight = 220;
+var canvasWidth = $(window).width();//490;
+var canvasHeight = $(window).height();//220;
 var padding = 25;
 var lineWidth = 8;
 var colorPurple = "#cb3594";
@@ -75,7 +75,7 @@ function resourceLoaded()
 */
 function prepareCanvas()
 {
-	// Create the canvas (Neccessary for IE because it doesn't know what a canvas element is)
+	// Create the canvas
 	var canvasDiv = document.getElementById('canvasDiv');
 	canvas = document.createElement('canvas');
 	canvas.setAttribute('width', canvasWidth);
@@ -85,101 +85,58 @@ function prepareCanvas()
 	if(typeof G_vmlCanvasManager != 'undefined') {
 		canvas = G_vmlCanvasManager.initElement(canvas);
 	}
-	context = canvas.getContext("2d"); // Grab the 2d canvas context
-	// Note: The above code is a workaround for IE 8 and lower. Otherwise we could have used:
-	//     context = document.getElementById('canvas').getContext("2d");
+	context = canvas.getContext("2d");
+
+	// context = document.getElementById('canvasInAPerfectWorld').getContext("2d");
 
 	// Load images
 	// -----------
-	crayonImage.onload = function() { resourceLoaded();
-	};
-	crayonImage.src = "images/crayon-outline.png";
-	context.drawImage(crayonImage, 0, 0, 100, 100);
-
-	markerImage.onload = function() { resourceLoaded();
-	};
-	markerImage.src = "images/marker-outline.png";
-
-	eraserImage.onload = function() { resourceLoaded();
-	};
-	eraserImage.src = "images/eraser-outline.png";
-
-	crayonBackgroundImage.onload = function() { resourceLoaded();
-	};
-	crayonBackgroundImage.src = "images/crayon-background.png";
-
-	markerBackgroundImage.onload = function() { resourceLoaded();
-	};
-	markerBackgroundImage.src = "images/marker-background.png";
-
-	eraserBackgroundImage.onload = function() { resourceLoaded();
-	};
-	eraserBackgroundImage.src = "images/eraser-background.png";
-
-	crayonTextureImage.onload = function() { resourceLoaded();
-	};
-	crayonTextureImage.src = "images/crayon-texture.png";
-
-	outlineImage.onload = function() { resourceLoaded();
-	};
-	outlineImage.src = "images/watermelon-duck-outline.png";
+	// crayonImage.onload = function() { resourceLoaded();
+	// };
+	// crayonImage.src = "images/crayon-outline.png";
+	// context.drawImage(crayonImage, 0, 0, 100, 100);
+	//
+	// markerImage.onload = function() { resourceLoaded();
+	// };
+	// markerImage.src = "images/marker-outline.png";
+	//
+	// eraserImage.onload = function() { resourceLoaded();
+	// };
+	// eraserImage.src = "images/eraser-outline.png";
+	//
+	// crayonBackgroundImage.onload = function() { resourceLoaded();
+	// };
+	// crayonBackgroundImage.src = "images/crayon-background.png";
+	//
+	// markerBackgroundImage.onload = function() { resourceLoaded();
+	// };
+	// markerBackgroundImage.src = "images/marker-background.png";
+	//
+	// eraserBackgroundImage.onload = function() { resourceLoaded();
+	// };
+	// eraserBackgroundImage.src = "images/eraser-background.png";
+	//
+	// crayonTextureImage.onload = function() { resourceLoaded();
+	// };
+	// crayonTextureImage.src = "images/crayon-texture.png";
+	//
+	// outlineImage.onload = function() { resourceLoaded();
+	// };
+	// outlineImage.src = "images/watermelon-duck-outline.png";
 
 	// Add mouse events
 	// ----------------
-	$('#canvas').mousedown(function(e)
-	{
-		// Mouse down location
-		var mouseX = e.pageX - this.offsetLeft;
-		var mouseY = e.pageY - this.offsetTop;
+	$('#canvas').mousedown(function(e){
+  	var mouseX = e.pageX - this.offsetLeft;
+  	var mouseY = e.pageY - this.offsetTop;
 
-		// Color picker (checking if left of the drawing area)
-		if(mouseX < drawingAreaX)
-		{
-			if(mouseX > mediumStartX)
-			{
-				if(mouseY > mediumStartY && mouseY < mediumStartY + mediumImageHeight){
-					curColor = colorPurple;
-				}else if(mouseY > mediumStartY + mediumImageHeight && mouseY < mediumStartY + mediumImageHeight * 2){
-					curColor = colorGreen;
-				}else if(mouseY > mediumStartY + mediumImageHeight * 2 && mouseY < mediumStartY + mediumImageHeight * 3){
-					curColor = colorYellow;
-				}else if(mouseY > mediumStartY + mediumImageHeight * 3 && mouseY < mediumStartY + mediumImageHeight * 4){
-					curColor = colorBrown;
-				}
-			}
-		}
-		// Tool picker (checking if right of the drawing area)
-		else if(mouseX > drawingAreaX + drawingAreaWidth)
-		{
-			if(mouseY > toolHotspotStartY)
-			{
-				if(mouseY > sizeHotspotStartY)
-				{
-					// Do nothing (deprecating size picker)
-				}
-				else
-				{
-					if(mouseY < toolHotspotStartY + toolHotspotHeight){
-						// curTool = "crayon";
-					}else if(mouseY < toolHotspotStartY + toolHotspotHeight * 2){
-						curTool = "marker";
-					}else if(mouseY < toolHotspotStartY + toolHotspotHeight * 3){
-						curTool = "eraser";
-					}
-				}
-			}
-		}
-		else if(mouseY > drawingAreaY && mouseY < drawingAreaY + drawingAreaHeight)
-		{
-			// Mouse click location on drawing area
-		}
-		paint = true;
-		addClick(mouseX, mouseY, false);
-		redraw();
+  	paint = true;
+  	addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
+  	redraw();
 	});
 
 	$('#canvas').mousemove(function(e){
-		if(paint==true){
+		if(paint){
 			addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
 			redraw();
 		}
@@ -187,12 +144,28 @@ function prepareCanvas()
 
 	$('#canvas').mouseup(function(e){
 		paint = false;
-	  redraw();
+	  // redraw();
 	});
 
 	$('#canvas').mouseleave(function(e){
 		paint = false;
 	});
+
+	$('#purple').click(function() {
+    curColor = colorPurple;
+  });
+
+	$('#yellow').click(function() {
+    curColor = colorYellow;
+  });
+
+	$('#green').click(function() {
+    curColor = colorGreen;
+  });
+
+	$('#brown').click(function() {
+    curColor = colorBrown;
+  });
 }
 
 /**
@@ -205,9 +178,9 @@ function addClick(x, y, dragging)
 {
 	clickX.push(x);
 	clickY.push(y);
-	clickTool.push(curTool);
+	// clickTool.push(curTool);
 	clickColor.push(curColor);
-	clickSize.push(curSize);
+	// clickSize.push(curSize);
 	clickDrag.push(dragging);
 }
 
@@ -219,134 +192,40 @@ function clearCanvas()
 	context.clearRect(0, 0, canvasWidth, canvasHeight);
 }
 
-function redrawHelper(locX, locY, color)
-{
-	context.beginPath();
-	context.moveTo(locX + 10, locY + 24);
-	context.lineTo(locX + 10, locY + 24);
-	context.lineTo(locX + 22, locY + 16);
-	context.lineTo(locX + 22, locY + 31);
-	context.closePath();
-	context.fillStyle = color;
-	context.fill();
-}
+// function redrawHelper(locX, locY, color)
+// {
+// 	context.beginPath();
+// 	context.moveTo(locX + 10, locY + 24);
+// 	context.lineTo(locX + 10, locY + 24);
+// 	context.lineTo(locX + 22, locY + 16);
+// 	context.lineTo(locX + 22, locY + 31);
+// 	context.closePath();
+// 	context.fillStyle = color;
+// 	context.fill();
+// }
 
 /**
 * Redraws the canvas.
 */
-function redraw()
-{
-	// Make sure required resources are loaded before redrawing
-	if(curLoadResNum < totalLoadResources){ return; }
+function redraw(){
+  context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
 
-	clearCanvas();
+  // context.strokeStyle = "#df4b26";
+  context.lineJoin = "round";
+  context.lineWidth = 5;
 
-	var locX;
-	var locY;
-	if(curTool == "marker")
-	{
-		// Draw the marker tool background
-		context.drawImage(markerBackgroundImage, 0, 0, canvasWidth, canvasHeight);
-
-		// Purple
-		locX = (curColor == colorPurple) ? 18 : 52;
-		locY = 19;
-		redrawHelper(locX, locY, colorPurple);
-
-		if(curColor == colorPurple){
-			context.drawImage(markerImage, locX, locY, mediumImageWidth, mediumImageHeight);
-		}else{
-			context.drawImage(markerImage, 0, 0, 59, mediumImageHeight, locX, locY, 59, mediumImageHeight);
-		}
-
-		// Green
-		locX = (curColor == colorGreen) ? 18 : 52;
-		locY += 46;
-		redrawHelper(locX, locY, colorGreen);
-
-		if(curColor == colorGreen){
-			context.drawImage(markerImage, locX, locY, mediumImageWidth, mediumImageHeight);
-		}else{
-			context.drawImage(markerImage, 0, 0, 59, mediumImageHeight, locX, locY, 59, mediumImageHeight);
-		}
-
-		// Yellow
-		locX = (curColor == colorYellow) ? 18 : 52;
-		locY += 46;
-		redrawHelper(locX, locY, colorYellow);
-
-		if(curColor == colorYellow){
-			context.drawImage(markerImage, locX, locY, mediumImageWidth, mediumImageHeight);
-		}else{
-			context.drawImage(markerImage, 0, 0, 59, mediumImageHeight, locX, locY, 59, mediumImageHeight);
-		}
-
-		// Brown
-		locX = (curColor == colorBrown) ? 18 : 52;
-		locY += 46;
-		redrawHelper(locX, locY, colorBrown);
-
-		if(curColor == colorBrown){
-			context.drawImage(markerImage, locX, locY, mediumImageWidth, mediumImageHeight);
-		}else{
-			context.drawImage(markerImage, 0, 0, 59, mediumImageHeight, locX, locY, 59, mediumImageHeight);
-		}
-	}
-	else if(curTool == "eraser")
-	{
-		context.drawImage(eraserBackgroundImage, 0, 0, canvasWidth, canvasHeight);
-		context.drawImage(eraserImage, 18, 19, mediumImageWidth, mediumImageHeight);
-	}else{
-		alert("Error: Current Tool is undefined");
-	}
-
-	locX = 450;
-	locY = 189;
-	context.beginPath();
-	context.rect(locX, locY, 2, 12);
-	context.closePath();
-	context.fillStyle = '#333333';
-	context.fill();
-
-	// Keep the drawing in the drawing area
-	context.save();
-	context.beginPath();
-	context.rect(drawingAreaX, drawingAreaY, drawingAreaWidth, drawingAreaHeight);
-	context.clip();
-
-	var radius = 5;
-	var i = 0;
-	for(; i < clickX.length; i++)
-	{
-		context.beginPath();
-		if(clickDrag[i] && i){
-			context.moveTo(clickX[i-1], clickY[i-1]);
-		}else{
-			context.moveTo(clickX[i], clickY[i]);
-		}
-		context.lineTo(clickX[i], clickY[i]);
-		context.closePath();
-
-		if(clickTool[i] == "eraser"){
-			//context.globalCompositeOperation = "destination-out"; // To erase instead of draw over with white
-			context.strokeStyle = 'white';
-		}else{
-			//context.globalCompositeOperation = "source-over";	// To erase instead of draw over with white
-			context.strokeStyle = clickColor[i];
-		}
-		context.lineJoin = "round";
-		context.lineWidth = radius;
-		context.stroke();
-
-	}
-	//context.globalCompositeOperation = "source-over";// To erase instead of draw over with white
-	context.restore();
-
-	context.globalAlpha = 1; // No IE support
-
-	// Draw the outline image
-	context.drawImage(outlineImage, drawingAreaX, drawingAreaY, drawingAreaWidth, drawingAreaHeight);
+  for(var i=0; i < clickX.length; i++) {
+    context.beginPath();
+    if(clickDrag[i] && i){
+      context.moveTo(clickX[i-1], clickY[i-1]);
+     }else{
+       context.moveTo(clickX[i]-1, clickY[i]);
+     }
+     context.lineTo(clickX[i], clickY[i]);
+     context.closePath();
+     context.stroke();
+		 context.strokeStyle = clickColor[i];
+  }
 }
-
 
 /**/
