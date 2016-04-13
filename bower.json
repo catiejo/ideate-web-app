@@ -1,0 +1,26 @@
+{
+  "name": "ideate-web-app",
+  "homepage": "https://github.com/catiejojo/ideate-web-app",
+  "authors": [
+    "catiejojo <catiejo.pidel@gmail.com>"
+  ],
+  "description": "remote brainstorming application",
+  "main": "ideate.html",
+  "keywords": [
+    "brainstorming",
+    "ideate",
+    "web",
+    "javascript"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.4.0"
+  }
+}
