@@ -2,17 +2,68 @@
 <html>
   <head>
     <title>iDeate</title>
+    <!--  Polymer -->
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+    <link rel="import" href="bower_components/iron-icon/iron-icon.html">
+    <link rel="import" href="bower_components/iron-image/iron-image.html">
+    <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
+    <link rel="import" href="bower_components/polymer/polymer.html">
+    <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="bower_componesnts/paper-styles/default-theme.html">
+    <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+    <link rel="import" href="bower_components/paper-menu/paper-menu.html">
+    <link rel="import" href="bower_components/paper-item/paper-item.html">
+    <link rel="import" href="bower_components/paper-menu-button/paper-menu-button.html">
+
+
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
     <script type="text/javascript" src="script.js"></script>
   </head>
   <body>
+    <style is="custom-style">
+      paper-toolbar {
+        --paper-toolbar-background: #FF6A0D;
+      }
+      .button {
+        /*display: block;*/
+        padding-top: 5px;
+        position: relative;
+        left: -100px;
+      }
+    </style>
+    <paper-toolbar>
+      <paper-icon-button icon="menu"></paper-icon-button>
+      <span class="title">Welcome to iDeate!</span>
+      <paper-icon-button id="share" icon="save"></paper-icon-button>
+      <template id="Demo" is="dom-bind">
+        <paper-menu-button>
+          <paper-icon-button id="choose" icon="arrow-drop-down" class="dropdown-trigger" alt="menu"></paper-icon-button>
+          <paper-menu class="dropdown-content">
+            <template is="dom-repeat" items="[[letters]]" as="letter">
+              <paper-item>[[letter]]</paper-item>
+            </template>
+          </paper-menu>
+        </paper-menu-button>
+      </template>
+    </paper-toolbar>
     <div class="colorsDiv">
-      <div class="button" id="purple"><strong>Purple</strong></div>
-      <div class="button" id="green"><strong>Green</strong></div>
-      <div class="button" id="yellow"><strong>Yellow</strong></div>
-      <div class="button" id="brown"><strong>Brown</strong></div>
+      <div class="button" id="light-blue"><strong><img src="resources/pencils_light_blue.png" /></strong></div>
+      <div class="button" id="dark-blue"><strong><img src="resources/pencils_dark_blue.png" /></strong></div>
+      <div class="button" id="yellow"><strong><img src="resources/pencils_yellow.png" /></strong></div>
+      <div class="button" id="red"><strong><img src="resources/pencils_red.png" /></strong></div>
+      <div class="button" id="black"><img src="resources/pencils_black.png" /></div>
     </div>
     <div id="canvasDiv"></div>
     <script type="text/javascript">$(document).ready(function() { prepareCanvas(); });</script>
   </body>
+  <script>
+    Demo.letters = [
+      'alpha',
+      'beta',
+      'gamma',
+      'delta',
+      'epsilon'
+    ];
+  </script>
 </html>
