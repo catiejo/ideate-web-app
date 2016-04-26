@@ -61,8 +61,9 @@
        */
       function listFiles() {
         var request = gapi.client.drive.files.list({
-            'pageSize': 10,
+            'pageSize': 5,
             'fields': "nextPageToken, files(id, name)"
+            // 'q': "banana"
           });
 
           request.execute(function(resp) {
