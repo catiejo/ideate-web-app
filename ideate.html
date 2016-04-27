@@ -2,6 +2,10 @@
 <html>
   <head>
     <title>iDeate</title>
+    <script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+
     <!--  Polymer -->
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="bower_components/iron-icons/iron-icons.html">
@@ -15,11 +19,6 @@
     <link rel="import" href="bower_components/paper-menu/paper-menu.html">
     <link rel="import" href="bower_components/paper-item/paper-item.html">
     <link rel="import" href="bower_components/paper-menu-button/paper-menu-button.html">
-
-
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
-    <script type="text/javascript" src="script.js"></script>
-    <script type="text/javascript" src="/html2canvas-0.4.1/build/html2canvas.js"></script>
   </head>
   <body>
     <style is="custom-style">
@@ -46,16 +45,17 @@
       <paper-icon-button icon="menu"></paper-icon-button>
       <span class="title">Welcome to iDeate!</span>
       <paper-icon-button id="share" icon="save"></paper-icon-button>
-      <template id="Demo" is="dom-bind">
+      <paper-icon-button id="choose" src="resources/drive.png" title="Choose where to save your ideas." onclick="loadPicker()"></paper-icon-button>
+      <!-- <template id="Demo" is="dom-bind">
         <paper-menu-button>
-          <paper-icon-button id="choose" icon="arrow-drop-down" class="dropdown-trigger" alt="menu"></paper-icon-button>
+          <paper-icon-button id="choose" icon="arrow-drop-down" class="dropdown-trigger" alt="menu" onclick="handleAuthClick(event)"></paper-icon-button>
           <paper-menu class="dropdown-content">
             <template is="dom-repeat" items="[[letters]]" as="letter">
               <paper-item>[[letter]]</paper-item>
             </template>
           </paper-menu>
         </paper-menu-button>
-      </template>
+      </template> -->
     </paper-toolbar>
     <div id="colorsDiv">
       <div class="button" id="light-blue"><img src="resources/pencils_light_blue.png" /></div>
