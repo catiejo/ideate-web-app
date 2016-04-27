@@ -1,0 +1,17 @@
+/* Copyright 2016 Catie Jo Pidel */
+
+.button {
+  padding-top: 5px;
+  position: relative;
+  left: -100px;
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+}
+#canvasDiv {
+  float: right;
+}
+#colorsDiv {
+  width: 0px;
+  float: left;
+}

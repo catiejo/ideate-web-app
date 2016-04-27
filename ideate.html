@@ -2,10 +2,12 @@
 <html>
   <head>
     <title>iDeate</title>
+    <link rel="stylesheet" href="style.css">
     <script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
-    <script type="text/javascript" src="script.js"></script>
-    <script src="/path/to/upload.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="drive_api.js"></script>
+    <script type="text/javascript" src="/path/to/upload.js"></script>
 
     <!--  Polymer -->
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
@@ -24,40 +26,16 @@
   <body>
     <style is="custom-style">
       paper-toolbar {
-        --paper-toolbar-background: #FF6A0D;
-      }
-      .button {
-        padding-top: 5px;
-        position: relative;
-        left: -100px;
-        -webkit-user-select: none; /* Chrome/Safari */
-        -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* IE10+ */
-      }
-      #canvasDiv {
-        float: right;
-      }
-      #colorsDiv {
-        width: 0px;
-        float: left;
+        --paper-toolbar-background: #666666;
       }
     </style>
     <paper-toolbar>
       <paper-icon-button icon="menu"></paper-icon-button>
-      <span class="title">Welcome to iDeate!</span>
+      <span class="title">Dazzle Us With Your Brilliance</span>
       <paper-icon-button id="share" icon="save"></paper-icon-button>
       <paper-icon-button id="choose" src="resources/drive.png" title="Choose where to save your ideas." onclick="loadPicker()"></paper-icon-button>
-      <!-- <template id="Demo" is="dom-bind">
-        <paper-menu-button>
-          <paper-icon-button id="choose" icon="arrow-drop-down" class="dropdown-trigger" alt="menu" onclick="handleAuthClick(event)"></paper-icon-button>
-          <paper-menu class="dropdown-content">
-            <template is="dom-repeat" items="[[letters]]" as="letter">
-              <paper-item>[[letter]]</paper-item>
-            </template>
-          </paper-menu>
-        </paper-menu-button>
-      </template> -->
     </paper-toolbar>
+
     <div id="colorsDiv">
       <div class="button" id="light-blue"><img src="resources/pencils_light_blue.png" /></div>
       <div class="button" id="dark-blue"><img src="resources/pencils_dark_blue.png" /></div>
@@ -65,7 +43,9 @@
       <div class="button" id="red"><img src="resources/pencils_red.png" /></div>
       <div class="button" id="black"><img src="resources/pencils_black.png" /></div>
     </div>
+
     <div id="canvasDiv"></div>
+
     <script type="text/javascript">$(document).ready(function() { prepareCanvas(); });</script>
   </body>
   <script>

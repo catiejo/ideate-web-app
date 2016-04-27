@@ -1,95 +1,10 @@
-// The Browser API key obtained from the Google Developers Console.
-// Replace with your own Browser API key, or your own key.
-var developerKey = 'AIzaSyAvvu3xY2Qc0AiawurKa56bzE0NgqbGlyw';
-
-// The Client ID obtained from the Google Developers Console. Replace with your own Client ID.
-var clientId = "584533696754-o1edrl4hn6icuuh782b01duofsd6suhh.apps.googleusercontent.com"
-
-// Replace with your own App ID. (Its the first number in your Client ID)
-var appId = "584533696754";
-
-// Scope to use to access user's Drive items.
-var scope = ['https://www.googleapis.com/auth/drive'];
-
-var pickerApiLoaded = false;
-var oauthToken;
-
-// Use the Google API Loader script to load the google.picker script.
-function loadPicker() {
-  gapi.load('auth', {'callback': onAuthApiLoad});
-  gapi.load('picker', {'callback': onPickerApiLoad});
-}
-
-function onAuthApiLoad() {
-  window.gapi.auth.authorize(
-      {
-        'client_id': clientId,
-        'scope': scope,
-        'immediate': false
-      },
-      handleAuthResult);
-}
-
-function onPickerApiLoad() {
-  pickerApiLoaded = true;
-  createPicker();
-}
-
-function handleAuthResult(authResult) {
-  if (authResult && !authResult.error) {
-    oauthToken = authResult.access_token;
-    createPicker();
-  }
-}
-
-// Create and render a Picker object for searching images.
-function createPicker() {
-  if (pickerApiLoaded && oauthToken) {
-    var view = new google.picker.DocsView()
-        .setIncludeFolders(true)
-        .setMimeTypes("application/vnd.google-apps.folder")
-        .setSelectFolderEnabled(true);
-    var picker = new google.picker.PickerBuilder()
-        .enableFeature(google.picker.Feature.NAV_HIDDEN)
-        .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
-        .setAppId(appId)
-        .setOAuthToken(oauthToken)
-        .addView(view)
-        .addView(new google.picker.DocsUploadView())
-        .setDeveloperKey(developerKey)
-        .setCallback(pickerCallback)
-        .build();
-     picker.setVisible(true);
-  }
-}
-
-// A simple callback implementation.
-function pickerCallback(data) {
-  if (data.action == google.picker.Action.PICKED) {
-    var fileId = data.docs[0].id;
-    alert('The user selected: ' + fileId);
-  }
-}
-
-// Copyright 2010 William Malone (www.williammalone.com)
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/* Copyright 2016 Catie Jo Pidel */
 
 var canvas,
  		context,
  		canvasWidth = $(window).width(),
 	 	canvasHeight = $(window).height(),
-	 	lineWidth = 8,
+	 	lineWidth = 10,
 	 	colorLightBlue = "#00a9ce",
 	 	colorDarkBlue = "#003057",
     colorRed = "#c8102e",
@@ -183,6 +98,21 @@ var createUserEvents = function()
 
 	$('#share').click(function() {
 			window.open(canvas.toDataURL());
+      // var restRequest = gapi.client.request({
+      //   'path': '/upload/drive/v3/files', 'method': 'POST',
+      //   'body': canvas.toDataURL()
+      // });
+      // restRequest.then(function(resp) {
+      //   console.log(resp.result);
+      // }, function(reason) {
+      //   console.log('Error: ' + reason.result.error.message);
+      // });
+      // alert(restRequest.result);
+      var uploader = new MediaUploader({
+        file: content,
+        token: accessToken,
+      });
+      uploader.upload();
 	});
 }
 
