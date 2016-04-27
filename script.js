@@ -14,7 +14,7 @@
 
 var canvas,
  		context,
- 		canvasWidth = $(window).width() - 250,
+ 		canvasWidth = $(window).width(),
 	 	canvasHeight = $(window).height(),
 	 	lineWidth = 8,
 	 	colorLightBlue = "#00a9ce",
