@@ -27,10 +27,19 @@
         --paper-toolbar-background: #FF6A0D;
       }
       .button {
-        /*display: block;*/
         padding-top: 5px;
         position: relative;
         left: -100px;
+        -webkit-user-select: none; /* Chrome/Safari */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+ */
+      }
+      #canvasDiv {
+        float: right;
+      }
+      #colorsDiv {
+        width: 0px;
+        float: left;
       }
     </style>
     <paper-toolbar>
@@ -48,11 +57,11 @@
         </paper-menu-button>
       </template>
     </paper-toolbar>
-    <div class="colorsDiv">
-      <div class="button" id="light-blue"><strong><img src="resources/pencils_light_blue.png" /></strong></div>
-      <div class="button" id="dark-blue"><strong><img src="resources/pencils_dark_blue.png" /></strong></div>
-      <div class="button" id="yellow"><strong><img src="resources/pencils_yellow.png" /></strong></div>
-      <div class="button" id="red"><strong><img src="resources/pencils_red.png" /></strong></div>
+    <div id="colorsDiv">
+      <div class="button" id="light-blue"><img src="resources/pencils_light_blue.png" /></div>
+      <div class="button" id="dark-blue"><img src="resources/pencils_dark_blue.png" /></div>
+      <div class="button" id="yellow"><img src="resources/pencils_yellow.png" /></div>
+      <div class="button" id="red"><img src="resources/pencils_red.png" /></div>
       <div class="button" id="black"><img src="resources/pencils_black.png" /></div>
     </div>
     <div class="driveDiv">
