@@ -34,18 +34,12 @@
         left: -100px;
       }
       #canvasDiv {
-        /*position: absolute;*/
-        /*z-index: 1;*/
         border: 5px solid navy;
         float: right;
-        /*display: inline-block;*/
       }
-      .colorsDiv {
+      #colorsDiv {
         border: 5px solid red;
         float: left;
-        /*display: inline-block;*/
-      }
-      .drawingBoard {
       }
     </style>
     <paper-toolbar>
@@ -63,16 +57,14 @@
         </paper-menu-button>
       </template>
     </paper-toolbar>
-    <div class="drawingBoard">
-      <div class="colorsDiv">
-        <div class="button" id="light-blue"><img src="resources/pencils_light_blue.png" /></div>
-        <div class="button" id="dark-blue"><img src="resources/pencils_dark_blue.png" /></div>
-        <div class="button" id="yellow"><img src="resources/pencils_yellow.png" /></div>
-        <div class="button" id="red"><img src="resources/pencils_red.png" /></div>
-        <div class="button" id="black"><img src="resources/pencils_black.png" /></div>
-      </div>
-      <div id="canvasDiv"></div>
+    <div id="colorsDiv">
+      <div class="button" id="light-blue"><img src="resources/pencils_light_blue.png" /></div>
+      <div class="button" id="dark-blue"><img src="resources/pencils_dark_blue.png" /></div>
+      <div class="button" id="yellow"><img src="resources/pencils_yellow.png" /></div>
+      <div class="button" id="red"><img src="resources/pencils_red.png" /></div>
+      <div class="button" id="black"><img src="resources/pencils_black.png" /></div>
     </div>
+    <div id="canvasDiv"></div>
     <script type="text/javascript">$(document).ready(function() { prepareCanvas(); });</script>
   </body>
   <script>
