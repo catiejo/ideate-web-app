@@ -17,16 +17,26 @@ var canvas,
  		canvasWidth = $(window).width(),
 	 	canvasHeight = $(window).height(),
 	 	lineWidth = 8,
-	 	colorPurple = "#cb3594",
-	 	colorGreen = "#659b41",
-	 	colorYellow = "#ffcf33",
-	 	colorBrown = "#986928",
+	 	colorLightBlue = "#00a9ce",
+	 	colorDarkBlue = "#003057",
+    colorRed = "#c8102e",
+	 	colorYellow = "#ffcd00",
+	 	colorBlack = "#000000",
 	 	clickX = new Array(),
 	 	clickY = new Array(),
 	 	clickColor = new Array(),
 	 	clickDrag = new Array(),
 	 	paint = false,
-	 	curColor = colorPurple;
+	 	curColor = colorLightBlue;
+
+var selectPencil = function(pencil_id)
+{
+  var buttons = document.getElementsByClassName("button");
+  for (var i=0; i<buttons.length; i++) {
+    buttons[i].style.left = "-100px";
+  }
+  document.getElementById(pencil_id).style.left = "-80px";
+}
 
 /**
 * Adds touch/mouse events
@@ -73,26 +83,34 @@ var createUserEvents = function()
 	canvas.addEventListener("touchcancel", cancel, false);
 
 	//TODO: put in updated format (like above)
-	$('#purple').click(function() {
-		curColor = colorPurple;
+	$('#light-blue').click(function() {
+		curColor = colorLightBlue;
+    selectPencil("light-blue");
 	});
+
+  $('#dark-blue').click(function() {
+    curColor = colorDarkBlue;
+    selectPencil("dark-blue");
+  });
 
 	$('#yellow').click(function() {
 		curColor = colorYellow;
+    selectPencil("yellow");
+  });
+
+	$('#red').click(function() {
+		curColor = colorRed;
+    selectPencil("red");
 	});
 
-	$('#green').click(function() {
-		curColor = colorGreen;
-	});
-
-	$('#brown').click(function() {
-		curColor = colorBrown;
+	$('#black').click(function() {
+		curColor = colorBlack;
+    selectPencil("black");
 	});
 
 	$('#share').click(function() {
 			window.open(canvas.toDataURL());
 	});
-
 }
 
 /**
@@ -100,6 +118,7 @@ var createUserEvents = function()
 */
 var prepareCanvas = function()
 {
+  selectPencil("light-blue");
 	// Create the canvas
 	canvas = document.createElement('canvas');
 	canvas.setAttribute('width', canvasWidth);
