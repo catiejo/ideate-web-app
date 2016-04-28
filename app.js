@@ -103,6 +103,7 @@ var createUserEvents = function()
           'token': getToken(),
         });
         uploader.upload();}, "image/jpeg");
+        clearCanvas();
 	});
 }
 
@@ -148,6 +149,10 @@ var addClick = function(x, y, dragging)
 var clearCanvas = function()
 {
 	context.clearRect(0, 0, canvasWidth, canvasHeight);
+  clickX = new Array();
+  clickY = new Array();
+  clickColor = new Array();
+  clickDrag = new Array();
 }
 
 /**
