@@ -81,7 +81,8 @@ var MediaUploader = function(options) {
   this.contentType = options.contentType || this.file.type || 'application/octet-stream';
   this.metadata = options.metadata || {
     'title': this.file.name,
-    'mimeType': this.contentType
+    'mimeType': this.contentType,
+    'parents': [{ 'kind': "drive#fileLink", 'id': "0B_fqIk0FFWuGYWVzQkFLLUlSdWc" }],
   };
   this.token = options.token;
   this.onComplete = options.onComplete || noop;
