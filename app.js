@@ -14,6 +14,7 @@ var canvas,
 	 	clickY = new Array(),
 	 	clickColor = new Array(),
 	 	clickDrag = new Array(),
+    clickUndo = new Array(),
 	 	paint = false,
 	 	curColor = colorLightBlue;
 
@@ -36,6 +37,7 @@ var createUserEvents = function()
 				mouseY = (e.changedTouches ? e.changedTouches[0].pageY : e.pageY) - this.offsetTop;
 				paint = true;
 
+    clickUndo.push(0);
 		addClick(mouseX, mouseY, false);
 		redraw();
 	};
@@ -107,11 +109,15 @@ var createUserEvents = function()
 	});
 
   $('#undo').click(function() {
-    console.log("undo clicked");
-    clickX.pop();
-  	clickY.pop();
-  	clickColor.pop();
-  	clickDrag.pop();
+    var strokeCount = clickUndo.pop(),
+        i = 0;
+        
+    for (i = 0; i < strokeCount; i++) {
+      clickX.pop();
+      clickY.pop();
+      clickColor.pop();
+      clickDrag.pop();
+    }
     redraw();
   });
 }
@@ -146,6 +152,7 @@ var prepareCanvas = function()
 */
 var addClick = function(x, y, dragging)
 {
+  clickUndo.push(clickUndo.pop() + 1);
 	clickX.push(x);
 	clickY.push(y);
 	clickColor.push(curColor);
