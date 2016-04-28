@@ -82,7 +82,7 @@ var MediaUploader = function(options) {
   this.metadata = options.metadata || {
     'title': this.file.name,
     'mimeType': this.contentType,
-    'parents': [{ 'kind': "drive#fileLink", 'id': "0B_fqIk0FFWuGYWVzQkFLLUlSdWc" }],
+    'parents': [{ 'kind': "drive#fileLink", 'id': getFolderID() }],
   };
   this.token = options.token;
   this.onComplete = options.onComplete || noop;

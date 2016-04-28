@@ -13,6 +13,7 @@ var scope = ['https://www.googleapis.com/auth/drive'];
 
 var pickerApiLoaded = false;
 var oauthToken;
+var folderID;
 
 // Use the Google API Loader script to load the google.picker script.
 function loadPicker() {
@@ -67,6 +68,7 @@ function createPicker() {
 function pickerCallback(data) {
   if (data.action == google.picker.Action.PICKED) {
     var fileId = data.docs[0].id;
+    folderID = fileId;
     alert('The user selected: ' + fileId);
   }
 }
@@ -74,4 +76,9 @@ function pickerCallback(data) {
 function getToken() {
   console.log(oauthToken);
   return oauthToken;
+}
+
+function getFolderID() {
+  console.log(folderID);
+  return folderID;
 }
