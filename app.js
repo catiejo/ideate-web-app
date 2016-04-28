@@ -97,22 +97,26 @@ var createUserEvents = function()
 	});
 
 	$('#share').click(function() {
-			window.open(canvas.toDataURL());
-      // var restRequest = gapi.client.request({
-      //   'path': '/upload/drive/v3/files', 'method': 'POST',
-      //   'body': canvas.toDataURL()
+      // var ideaURL = canvas.toDataURL();
+      // var ideaBlob;
+      canvas.toBlob(function(blob) {
+        var uploader = new MediaUploader({
+          'file': blob,
+          'token': getToken(),
+        });
+        uploader.upload();}, "image/jpeg");
+      // var idea;
+      // $.get(ideaURL, function(data){
+      //   idea = data;
+      //   console.log(data);
+      //   // alert("Status: " + status);
       // });
-      // restRequest.then(function(resp) {
-      //   console.log(resp.result);
-      // }, function(reason) {
-      //   console.log('Error: ' + reason.result.error.message);
+			// window.open(ideaURL);
+      // var uploader = new MediaUploader({
+      //   'file': ideaBlob,
+      //   'token': getToken(),
       // });
-      // alert(restRequest.result);
-      var uploader = new MediaUploader({
-        file: content,
-        token: accessToken,
-      });
-      uploader.upload();
+      // uploader.upload();
 	});
 }
 

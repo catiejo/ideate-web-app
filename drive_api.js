@@ -70,3 +70,8 @@ function pickerCallback(data) {
     alert('The user selected: ' + fileId);
   }
 }
+
+function getToken() {
+  console.log(oauthToken);
+  return oauthToken;
+}

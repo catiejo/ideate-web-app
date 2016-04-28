@@ -7,7 +7,7 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="drive_api.js"></script>
-    <script type="text/javascript" src="/path/to/upload.js"></script>
+    <script type="text/javascript" src="upload.js"></script>
 
     <!--  Polymer -->
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
@@ -17,7 +17,7 @@
     <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
     <link rel="import" href="bower_components/polymer/polymer.html">
     <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
-    <link rel="import" href="bower_componesnts/paper-styles/default-theme.html">
+    <link rel="import" href="bower_components/paper-styles/default-theme.html">
     <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
     <link rel="import" href="bower_components/paper-menu/paper-menu.html">
     <link rel="import" href="bower_components/paper-item/paper-item.html">
@@ -35,6 +35,7 @@
       <paper-icon-button id="share" icon="save"></paper-icon-button>
       <paper-icon-button id="choose" src="resources/drive.png" title="Choose where to save your ideas." onclick="loadPicker()"></paper-icon-button>
     </paper-toolbar>
+    <p id="data"></p>
 
     <div id="colorsDiv">
       <div class="button" id="light-blue"><img src="resources/pencils_light_blue.png" /></div>
@@ -48,13 +49,4 @@
 
     <script type="text/javascript">$(document).ready(function() { prepareCanvas(); });</script>
   </body>
-  <script>
-    Demo.letters = [
-      'alpha',
-      'beta',
-      'gamma',
-      'delta',
-      'epsilon'
-    ];
-  </script>
 </html>
