@@ -69,7 +69,7 @@ function pickerCallback(data) {
   if (data.action == google.picker.Action.PICKED) {
     var fileId = data.docs[0].id;
     folderID = fileId;
-    alert('The user selected: ' + fileId);
+    // alert('The user selected: ' + fileId);
   }
 }
 

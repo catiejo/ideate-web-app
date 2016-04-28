@@ -97,14 +97,23 @@ var createUserEvents = function()
 	});
 
 	$('#share').click(function() {
-      canvas.toBlob(function(blob) {
-        var uploader = new MediaUploader({
-          'file': blob,
-          'token': getToken(),
-        });
-        uploader.upload();}, "image/jpeg");
-        clearCanvas();
+    canvas.toBlob(function(blob) {
+      var uploader = new MediaUploader({
+        'file': blob,
+        'token': getToken(),
+      });
+    uploader.upload();}, "image/jpeg");
+    clearCanvas();
 	});
+
+  $('#undo').click(function() {
+    console.log("undo clicked");
+    clickX.pop();
+  	clickY.pop();
+  	clickColor.pop();
+  	clickDrag.pop();
+    redraw();
+  });
 }
 
 /**
