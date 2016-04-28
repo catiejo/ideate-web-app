@@ -97,26 +97,12 @@ var createUserEvents = function()
 	});
 
 	$('#share').click(function() {
-      // var ideaURL = canvas.toDataURL();
-      // var ideaBlob;
       canvas.toBlob(function(blob) {
         var uploader = new MediaUploader({
           'file': blob,
           'token': getToken(),
         });
         uploader.upload();}, "image/jpeg");
-      // var idea;
-      // $.get(ideaURL, function(data){
-      //   idea = data;
-      //   console.log(data);
-      //   // alert("Status: " + status);
-      // });
-			// window.open(ideaURL);
-      // var uploader = new MediaUploader({
-      //   'file': ideaBlob,
-      //   'token': getToken(),
-      // });
-      // uploader.upload();
 	});
 }
 
